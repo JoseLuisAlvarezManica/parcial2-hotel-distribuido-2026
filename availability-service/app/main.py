@@ -90,6 +90,9 @@ def callback(ch, method, properties, body):
         else:
             event = {**payload, "event": "BOOKING_REJECTED", "reason": reason}
             routing_key = "booking.rejected"
+        
+        # Prueba para comprobar la lógica de reintento en caso de errores
+        #raise Exception
 
         ch.basic_publish(
             exchange="hotel",
@@ -98,8 +101,11 @@ def callback(ch, method, properties, body):
             properties=pika.BasicProperties(content_type="application/json"),
         )
         logger.info("Publicado %s para %s", routing_key, booking_id)
+        ch.basic_ack(delivery_tag=method.delivery_tag)
     except Exception as exc:
         logger.error("Error procesando %s: %s", booking_id, exc)
+        ch.basic_nack(delivery_tag=method.delivery_tag, requeue=True)
+    
 
 
 def main() -> None:
@@ -118,7 +124,7 @@ def main() -> None:
     channel.basic_consume(
         queue=result.method.queue,
         on_message_callback=callback,
-        auto_ack=True,
+        auto_ack=False,
     )
     logger.info("availability-service esperando booking.requested...")
     channel.start_consuming()

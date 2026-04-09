@@ -7,6 +7,7 @@
 ## Bugs arreglados (Tier 1)
 
 ### B1 — Routing key
+José Álvarez
 **Qué encontré:**
 En el servicio booking-api, bajo el documento rabbitmq.py, el routing key era `booking.created`; en cambio, en availability-service, dentro del main.py, este era `booking.requested`.
 
@@ -14,11 +15,12 @@ En el servicio booking-api, bajo el documento rabbitmq.py, el routing key era `b
 La manera más sencilla de arreglarlo es que las llaves coincidan, por lo cual decidí que `booking.requested` era la que más lógica tenía dentro del contexto de ambas.
 
 **Por qué esto era un problema:**
-Dentro de un exchange en RabbitMQ, las routing keys determinan cuándo un mensaje es recibido por un subscriber. La routing key del mensaje de un publisher debe coincidir con la del subscriber; si no coinciden, el subscriber nunca lo recibiría.
+Dentro de un exchange en RabbitMQ, las routing keys determinan cuándo un mensaje es recibido por un subscriber. La routing key del mensaje de un productor debe coincidir con la de un consumidor; si no coinciden, el subscriber nunca lo recibiría.
 
 ---
 
 ### B2 — Manejo de error en publish
+José Álvarez
 **Qué encontré:**
 Dentro del POST para el endpoint `/bookings` en `booking-api` no existía una lógica que respaldara la operación en caso de errores. Esto tiene relevancia en una función que publica asincrónamente a RabbitMQ.
 
@@ -31,6 +33,15 @@ Porque al no tener una lógica para manejar los posibles errores, siempre se ind
 ---
 
 ### B3 — Ack manual
+José Álvarez
+**Qué encontré:**
+El consumer para la routing key `booking.requested` mandaba automáticamente una confirmación al recibir un mensaje.
+
+**Cómo lo arreglé:**
+Le indiqué al consumer que no mandara automáticamente las confirmaciones, revisé el callback relacionado y detecté que la confirmación manual tenía que realizarse después de la publicación en el callback. A su vez, se incluyó en caso de error un `nack` para que RabbitMQ vuelva a enviar el mensaje y se repita el proceso. Para probarlo temporalmente puse un raise exception al inicio del callback y vi que se repitiera el mensaje de error del servicio.
+
+**Por qué esto era un problema:**
+Al mandar la confirmación de manera automática no se protegía el programa de posibles errores. Imagina que una reserva no es enviada al servicio de pagos o no es rechazada correctamente; esto implicaría que el mensaje se pierde y la petición termina incompleta dentro del sistema.
 
 ---
 
