@@ -76,7 +76,8 @@ Las credenciales y URL de Postgres están hardcodeadas en el código. Esto es un
 
 **Cómo verificar el arreglo:**
 ```bash
-grep -r "hardcoded" payment-service/
+
+
 ```
 No debe quedar ninguna referencia.
 

@@ -75,7 +75,15 @@ Aunque puede existir un valor predeterminado en caso de pruebas (pues en `availa
 ### B5 — Race condition con `with_for_update()`
 
 ### B7 — Idempotencia
+José Álvarez
+**Qué encontré:**  
+Siendo sincero, no sé si lo habría notado sin la documentación. Pero similar a la situación del ACK manual anterior, si el proceso de registro de pago falla antes de finalizar se crea un problema: al reiniciar el proceso se vuelve a intentar cobrar al individuo al no tener una comprobación antes del cobro.
 
+**Cómo lo arreglé:**  
+Se creó en el archivo `db.py` la tabla `processed_events`, la cual solo guarda una llave primaria (el booking ID que se maneja en payment). En el archivo `main.py` se editó la función `process_event`, a la cual se le agregó una comprobación que busca si ya existe en la base de datos un `processed_event` con el ID del booking. En caso de encontrarlo, consulta la tabla `Payment` para identificar el estado de la operación y retornar si el pago se realizó con éxito (se asume que RabbitMQ no envió el mensaje a `payment.completed` o `payment.failed`). En caso de no encontrarlo, procede a registrar el evento y el pago en la base de datos.
+
+**Por qué esto era un problema:**  
+Si el flujo falla antes de poder realizar el ACK, el evento se registra en la base de datos pero el proceso se interrumpe. Esto causa varios problemas: es muy probable que no se haya enviado el mensaje correspondiente a RabbitMQ, y además se cobraría más de una vez al individuo, generando registros duplicados en la tabla `Payment`.
 ---
 
 ## Bonus que implementé (si aplica)

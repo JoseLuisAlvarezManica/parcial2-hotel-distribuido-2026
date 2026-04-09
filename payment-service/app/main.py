@@ -10,7 +10,8 @@ import random
 
 import aio_pika
 
-from .db import Payment, SessionLocal, init_db
+from .db import Payment, Processed_events, SessionLocal, init_db
+from sqlalchemy import select
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
 logger = logging.getLogger("payment-service")
@@ -38,17 +39,37 @@ async def process_event(payload: dict) -> tuple[bool, str]:
     # cobrar dos veces. Necesitas chequear si el booking_id ya fue procesado
     # antes de cobrar. Una opción simple: una tabla processed_events(event_id PK)
     # y tratar de insertarlo al inicio; si ya existe, saltar el cobro.
+    
+    #Comprobar que no exista dentro de la bd el evento de pago
+    async with SessionLocal() as session:
+        command = select(Processed_events).where(Processed_events.event_id == booking_id)
+        payment = session.execute(command).scalar_one_or_none()
+    
+        if payment:
+            query = select(Payment.status).where(Payment.booking_id == booking_id)
+            is_success = (await session.execute(query)).scalar_one_or_none()
+            logger.info("Evento ya procesado, procesando el duplicado booking=%s", booking_id)
+            return is_success == "COMPLETED", "duplicado procesado"
+        
     success, reason = await charge_payment(payload)
 
     async with SessionLocal() as session:
-        session.add(
-            Payment(
-                booking_id=booking_id,
-                amount=amount,
-                status="COMPLETED" if success else "FAILED",
-            )
+        #Registrar pago como evento procesado
+        session.add(Processed_events(
+                        event_id=booking_id
+                    )
         )
+
+        session.add(
+                    Payment(
+                        booking_id=booking_id,
+                        amount=amount,
+                        status="COMPLETED" if success else "FAILED",
+                    )
+                )
+        
         await session.commit()
+
 
     if success:
         logger.info("Pago COMPLETADO booking=%s monto=%d", booking_id, amount)
@@ -58,11 +79,13 @@ async def process_event(payload: dict) -> tuple[bool, str]:
     return success, reason
 
 
+
 async def callback(message: aio_pika.IncomingMessage) -> None:
     async with message.process():
         payload = json.loads(message.body)
         booking_id = payload.get("booking_id")
         logger.info("Recibido booking.confirmed: %s", booking_id)
+
 
         success, reason = await process_event(payload)
 
