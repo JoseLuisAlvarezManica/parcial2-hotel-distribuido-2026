@@ -19,6 +19,14 @@ Dentro de un exchange en RabbitMQ, las routing keys determinan cuándo un mensaj
 ---
 
 ### B2 — Manejo de error en publish
+**Qué encontré:**
+Dentro del POST para el endpoint `/bookings` en `booking-api` no existía una lógica que respaldara la operación en caso de errores. Esto tiene relevancia en una función que publica asincrónamente a RabbitMQ.
+
+**Cómo lo arreglé:**
+Se encapsuló en un `try` la función `publish_booking`, permitiendo que, en caso de error, se pueda crear una excepción en la cual se registre el problema para un desarrollador y se indique al usuario que un servicio no está disponible (503).
+
+**Por qué esto era un problema:**
+Porque al no tener una lógica para manejar los posibles errores, siempre se indicaba que la operación era exitosa para el usuario, y no se avisaba ni alertaba a un desarrollador que el servicio de RabbitMQ no estaba disponible y que era necesario tomar acción para corregirlo.
 
 ---
 

@@ -48,7 +48,12 @@ async def create_booking(body: BookingIn):
     # BUG: maneja el fallo del publish. Si RabbitMQ está caído, el cliente
     # recibe un 202 OK aunque el evento nunca salió. Debes envolver esto en
     # try/except, loggear el error, y devolver 503 al cliente.
-    await publish_booking(payload)
+    try:
+        await publish_booking(payload)
+    except Exception as e:
+        logger.error("Error publicando la reserva: %s. Error: %s", booking_id, e)
+        raise HTTPException(status_code=503, detail="Error al publicar la reserva.")
+
 
     await r.aclose()
     return BookingCreated(booking_id=booking_id, status="REQUESTED")
