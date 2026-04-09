@@ -35,7 +35,7 @@ Porque al no tener una lógica para manejar los posibles errores, siempre se ind
 ### B3 — Ack manual
 José Álvarez
 **Qué encontré:**
-El consumer para la routing key `booking.requested` mandaba automáticamente una confirmación al recibir un mensaje.
+Que el consumer para la routing key `booking.requested` mandaba automáticamente una confirmación al recibir un mensaje.
 
 **Cómo lo arreglé:**
 Le indiqué al consumer que no mandara automáticamente las confirmaciones, revisé el callback relacionado y detecté que la confirmación manual tenía que realizarse después de la publicación en el callback. A su vez, se incluyó en caso de error un `nack` para que RabbitMQ vuelva a enviar el mensaje y se repita el proceso. Para probarlo temporalmente puse un raise exception al inicio del callback y vi que se repitiera el mensaje de error del servicio.
@@ -46,6 +46,15 @@ Al mandar la confirmación de manera automática no se protegía el programa de 
 ---
 
 ### B6 — Credenciales en env vars
+José Álvarez
+**Qué encontré:**  
+La ruta para conectarse a la base de datos estaba expuesta, demostrando las credenciales necesarias (usuario, contraseña, nombre de la base de datos y el host) para que un agente malicioso pueda acceder a ella.
+
+**Cómo lo arreglé:**  
+Basándome en cómo se implementó la creación de la URL en `availability-service`, la recreé en `payment-service`, considerando que este último utiliza `asyncpg` en lugar de `psycopg2`.
+
+**Por qué esto era un problema:**  
+Aunque puede existir un valor predeterminado en caso de pruebas (pues en `availability-service` existen si no se obtienen del env), al desplegar la aplicación, tener el enlace expuesto dentro del código representa un peligro, ya que se está revelando información sensible y, en este caso, se está exponiendo la base de datos a cambios y ataques directos a través de un punto de acceso confirmado.
 
 ---
 
