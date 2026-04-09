@@ -5,16 +5,24 @@
 ## Integrante 1
 
 - **Nombre completo:**
+José Luis Álvarez Mánica
 - **Matrícula:**
+198001
 - **Correo:**
+198001@iberopuebla.mx
 - **Usuario de Git que va a usar para sus commits:**
+JoseLuisAlvarezManica
 
 ## Integrante 2
 
 - **Nombre completo:**
+José Espinoza Ordaz
 - **Matrícula:**
+197272
 - **Correo:**
+197272@iberopuebla.mx
 - **Usuario de Git que va a usar para sus commits:**
+Jose-Esp-Ordas 
 
 ---
 
@@ -24,20 +32,20 @@
 
 | Bug / Tarea | Responsable principal | Apoyo |
 |---|---|---|
-| B1 — routing key en booking-api | | |
-| B2 — manejo de error en publish | | |
-| B3 — auto_ack en availability-service | | |
-| B4 — overlap de fechas | | |
-| B5 — race condition con `with_for_update()` | | |
-| B6 — credenciales hardcodeadas | | |
-| B7 — idempotencia en payment-service | | |
-| `notification-service` (TODOs) | | |
-| `notification-service` en docker-compose | | |
-| Capturas de RabbitMQ | | |
-| Logs end-to-end | | |
-| `DECISIONES.md` | | |
-| `PROMPTS.md` | | |
-| (otro) | | |
+| B1 — routing key en booking-api | José Álvarez | |
+| B2 — manejo de error en publish | José Álvarez | |
+| B3 — auto_ack en availability-service | José Álvarez | |
+| B4 — overlap de fechas | Jose Espinoza | |
+| B5 — race condition con `with_for_update()` | Jose Espinoza | José Álvarez |
+| B6 — credenciales hardcodeadas | José Álvarez | |
+| B7 — idempotencia en payment-service | José Álvarez | José Espinoza|
+| `notification-service` (TODOs) | Jose Espinoza | |
+| `notification-service` en docker-compose | Jose Espinoza | |
+| Capturas de RabbitMQ | Jose Alvarez | |
+| Logs end-to-end | Jose Espinoza | |
+| `DECISIONES.md` | Ambos | |
+| `PROMPTS.md` | Ambos | |
+| (otro) | Ambos | |
 
 ---
 
