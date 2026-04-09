@@ -8,10 +8,13 @@
 
 ### B1 — Routing key
 **Qué encontré:**
+En el servicio booking-api, bajo el documento rabbitmq.py, el routing key era `booking.created`; en cambio, en availability-service, dentro del main.py, este era `booking.requested`.
 
 **Cómo lo arreglé:**
+La manera más sencilla de arreglarlo es que las llaves coincidan, por lo cual decidí que `booking.requested` era la que más lógica tenía dentro del contexto de ambas.
 
 **Por qué esto era un problema:**
+Dentro de un exchange en RabbitMQ, las routing keys determinan cuándo un mensaje es recibido por un subscriber. La routing key del mensaje de un publisher debe coincidir con la del subscriber; si no coinciden, el subscriber nunca lo recibiría.
 
 ---
 

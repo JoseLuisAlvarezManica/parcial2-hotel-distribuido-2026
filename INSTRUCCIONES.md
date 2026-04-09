@@ -209,7 +209,7 @@ Cualquier combinación de:
 
 Antes del push final:
 
-- [ ] `INTEGRANTES.md` lleno con nombres, matrículas y división de trabajo
+- [X] `INTEGRANTES.md` lleno con nombres, matrículas y división de trabajo
 - [ ] Tier 1 completo
 - [ ] Flujo end-to-end probado y documentado en `evidence/`
 - [ ] Capturas de RabbitMQ Management UI mostrando los exchanges/queues correctos
