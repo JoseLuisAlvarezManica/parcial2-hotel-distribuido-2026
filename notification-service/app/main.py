@@ -31,20 +31,22 @@ RABBITMQ_URL = os.getenv("RABBITMQ_URL", "amqp://guest:guest@rabbitmq:5672/")
 # No olvides hacer ack manual al final del callback (ch.basic_ack).
 
 def callback(ch, method, properties, body):
-    #Obtener datos
-    payload = json.loads(body)
-    booking_id = payload["booking_id"]
-    event = payload["event"]
-    guest = payload["guest"]
-    channel = "email"
-    status = "SENT"
+    try:
+        payload = json.loads(body)
+        booking_id = payload["booking_id"]
+        event = payload["event"]
+        guest = payload["guest"]
+        channel = "email"
+        status = "SENT"
 
-    #Simular envio por correo
-    logger.info("[NOTIFICATION] booking_id=%s event=%s guest=%s channel=%s status=%s",
-                booking_id, event, guest, channel, status)
-    
-    #Confirmar
-    ch.basic_ack(delivery_tag=method.delivery_tag)
+        logger.info("[NOTIFICATION] booking_id=%s event=%s guest=%s channel=%s status=%s",
+                    booking_id, event, guest, channel, status)
+
+        ch.basic_ack(delivery_tag=method.delivery_tag)
+
+    except Exception as exc:
+        logger.error("Error enviando notificación: %s", exc)
+        ch.basic_nack(delivery_tag=method.delivery_tag)
 
 
 def main() -> None:

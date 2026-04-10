@@ -62,12 +62,16 @@ Aunque puede existir un valor predeterminado en caso de pruebas (pues en `availa
 
 **Qué TODOs había:**
 TODO 1: Configurar adecuadamente el consumidor de RabbitMQ
-TODO 2: Crear la logica de negocio dentro del callback
-TODO 3: iniciar el consumer adecuadamente
+TODO 2: Crear la lógica de negocio dentro del callback
+TODO 3: Iniciar el consumer adecuadamente
 
 **Cómo los implementé:**
+TODO 1 y 3: Primero copié de payment service la lógica del main, consideré qué era necesario y qué estaba de más. Con lo que quedó, lo adapté según las especificaciones que requería el notification service (exchange = hotel, queue = notifications) y dupliqué el bind de la queue asignándoles sus routing keys respectivas (payment.completed y payment.failed).
+
+TODO 2: Basándome en el callback de payment service, creé una función en la cual se decodificaban del JSON los parámetros relevantes a la notificación y se guardaban en variables. Seguido, se creó el log de la notificación con el formato adecuado y la confirmación del ack. Se decidió, por precaución, envolver lo anterior en un try/except donde se indicara en el except que hubo un error al notificar y se creara un nack.
 
 **Decisiones de diseño que tomé:**
+En el TODO 2, como mencioné, decidí agregar adicionalmente un try/except para poder indicar si hubo algún error y descartar el mensaje sin reencolarlo. Esto último fue un dilema, dado que la sencillez de la tarea me hizo cuestionarme si debía no reencolar los mensajes en caso de un nack, pues algo tendría que haber salido muy mal para que esta tarea sencilla fracasara.
 
 ---
 
