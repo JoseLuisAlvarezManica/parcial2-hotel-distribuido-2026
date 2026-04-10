@@ -54,6 +54,8 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+  
+
 
   # ── Procesamiento de pagos (payment-service) ───────────────
   payment-service:
@@ -69,6 +71,14 @@ services:
   # NOTA: notification-service NO está aquí. Tú debes agregarlo
   # como parte del Tier 1. Mira la carpeta notification-service/
   # y replica el patrón de los otros servicios.
+  notification-service:
+    build: ./notification-service
+    env_file: .env
+    restart: on-failure
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+  
 
 volumes:
   pg_data:
