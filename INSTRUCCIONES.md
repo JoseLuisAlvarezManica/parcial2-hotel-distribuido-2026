@@ -212,12 +212,12 @@ Antes del push final:
 
 - [X] `INTEGRANTES.md` lleno con nombres, matrículas y división de trabajo
 - [X] Tier 1 completo
-- [ ] Flujo end-to-end probado y documentado en `evidence/`
-- [ ] Capturas de RabbitMQ Management UI mostrando los exchanges/queues correctos
+- [X] Flujo end-to-end probado y documentado en `evidence/`
+- [X] Capturas de RabbitMQ Management UI mostrando los exchanges/queues correctos
 - [X] `PROMPTS.md` lleno (declaración de uso de IA)
-- [ ] `DECISIONES.md` lleno
+- [X] `DECISIONES.md` lleno
 - [X] Commits descriptivos de **ambos** integrantes en el historial
-- [ ] Link del fork público subido a Moodle
+- [X] Link del fork público subido a Moodle
 
 ## Cómo pedir ayuda
 

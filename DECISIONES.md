@@ -93,9 +93,12 @@ Se creó en el archivo `db.py` la tabla `processed_events`, la cual solo guarda 
 
 **Por qué esto era un problema:**  
 Si el flujo falla antes de poder realizar el ACK, el evento se registra en la base de datos pero el proceso se interrumpe. Esto causa varios problemas: es muy probable que no se haya enviado el mensaje correspondiente a RabbitMQ, y además se cobraría más de una vez al individuo, generando registros duplicados en la tabla `Payment`.
+
 ---
 
 ## Bonus que implementé (si aplica)
+
+No aplica.
 
 ---
 
@@ -103,6 +106,11 @@ Si el flujo falla antes de poder realizar el ACK, el evento se registra en la ba
 
 (Ej: "no agregué tests porque preferí enfocarme en el flujo end-to-end", "no implementé saga porque no me dio tiempo", etc.)
 
+Debido al tiempo y al hecho de que realicé el examen solo, decidí no realizar la sección 3 de bonuses por el momento. Tal vez lo intente más adelante.
+
 ---
 
 ## Si tuviera más tiempo, lo siguiente que mejoraría sería:
+Primero revisaría mi sistema de logs, porque noté que, aunque el sistema se comportaba como deseaba, tal vez me faltó algún log para hacerlo más legible (especialmente en la race condition y el overlap de fechas).
+
+Mejoraría la documentación e implementaría el sistema de saga para cancelar las reservas cuyos pagos no fueron procesados.

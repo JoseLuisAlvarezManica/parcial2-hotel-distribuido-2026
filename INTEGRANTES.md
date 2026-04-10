@@ -44,7 +44,7 @@ JoseLuisAlvarezManica
 
 ### Lo que hizo Integrante 1
 
-
+Debido a un cambio en la línea temporal, el integrante 1 fue el único que existió, por lo que este individuo hizo todo. Ya fuera de broma, intenté completar las secciones 1 y 2 del examen a lo mejor de mis capacidades; debido al tiempo, no intenté realizar mejoras extras, pero tal vez lo intente más adelante.
 
 
 ---
@@ -52,3 +52,5 @@ JoseLuisAlvarezManica
 ## Notas sobre el trabajo en pareja
 
 (Opcional) ¿Hubo algo difícil de coordinar? ¿Mejoras al flujo de trabajo en pareja para la próxima vez?
+
+Cuando José Espinoza todavía estaba contemplado como integrante, fue un individuo muy comprensivo y abierto a coordinar el trabajo, aunque hiciera su parte a destiempo. Creo que lo mejor que pudimos haber hecho fue leer juntos la documentación, identificar qué componentes dependen de otros e intentar dividir el trabajo de manera que cada parte pudiera avanzarse de forma independiente.
