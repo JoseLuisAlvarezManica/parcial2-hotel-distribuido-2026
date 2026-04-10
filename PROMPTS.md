@@ -12,8 +12,6 @@
 ## ¿Quién la usó?
 
 - [X] Integrante 1 (Mánica)
-- [ ] Integrante 2 
-- [ ] Ambos
 
 ---
 
@@ -22,7 +20,7 @@
 ### Herramientas usadas
 (Ej: Claude.ai, ChatGPT-4, GitHub Copilot, Cursor, etc.)
 
-- Claude
+- Claude en linea y en copilot.
 
 ### Prompts principales
 Listen los 3-5 prompts más importantes que escribieron y para qué los usaron.
@@ -37,22 +35,22 @@ Listen los 3-5 prompts más importantes que escribieron y para qué los usaron.
    **Quién lo usó:** Integrante 1
    **Qué tan útil fue:** (3)
 
-3. **Prompt:** 
-   **Para qué:** 
-   **Quién lo usó:** Integrante 1 / Integrante 2
-   **Qué tan útil fue:** (1-5)
+3. **Prompt:** Presento el siguiente error, ¿me podrías explicar por qué está sucediendo? Copy-paste de un error de payment service.
+   **Para qué:** Para comprender qué se realizó mal, cuál es su causa y tener ideas de dónde corregir o cómo solucionar el problema.
+   **Quién lo usó:** Integrante 1
+   **Qué tan útil fue:** (5)
 
 
 ### ¿En qué partes los apoyó?
 (Ej: explicación de `with_for_update()`, generación de boilerplate del notification-service, debugging de un error de aio-pika...)
 
--
+- Me ayudó a corregir un error mío que ocasioné al crear la idempotencia en payment service (me faltó un await y los logs de error eran confusos).
 
 ### ¿Hubo cosas en las que la IA dio respuestas incorrectas o que tuvieron que corregir?
 (Ser honestos aquí suma puntos de criterio)
 
-- Se equivoco en repetidas ocasiones en la traducción de los comandos al ambiente de Windows, por lo cual se tuvo que iterar en varias ocasiones.
+- Se equivocó en repetidas ocasiones en la traducción de los comandos al ambiente de Windows, por lo cual se tuvo que iterar en varias ocasiones.
 
 ### ¿Qué decidieron hacer manualmente sin IA y por qué?
 
--
+- La mayoría de las cosas se realizaron sin IA (aunque sí tuve que investigar), debido a que consideré que mis conocimientos eran equiparables a la tarea a realizar. La IA es una buena herramienta para investigar temas nuevos, buscar posibles fallos y entenderlos, pero creo que se aprende considerablemente más intentándolo primero uno mismo.

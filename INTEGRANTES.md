@@ -13,17 +13,6 @@ José Luis Álvarez Mánica
 - **Usuario de Git que va a usar para sus commits:**
 JoseLuisAlvarezManica
 
-## Integrante 2
-
-- **Nombre completo:**
-José Espinoza Ordaz
-- **Matrícula:**
-197272
-- **Correo:**
-197272@iberopuebla.mx
-- **Usuario de Git que va a usar para sus commits:**
-Jose-Esp-Ordas 
-
 ---
 
 ## División inicial del trabajo
@@ -35,17 +24,17 @@ Jose-Esp-Ordas
 | B1 — routing key en booking-api | José Álvarez | |
 | B2 — manejo de error en publish | José Álvarez | |
 | B3 — auto_ack en availability-service | José Álvarez | |
-| B4 — overlap de fechas | Jose Espinoza | |
-| B5 — race condition con `with_for_update()` | Jose Espinoza | José Álvarez |
+| B4 — overlap de fechas | José Álvarez | |
+| B5 — race condition con `with_for_update()` | José Álvarez |  |
 | B6 — credenciales hardcodeadas | José Álvarez | |
-| B7 — idempotencia en payment-service | José Álvarez | José Espinoza|
-| `notification-service` (TODOs) | Jose Espinoza | |
-| `notification-service` en docker-compose | Jose Espinoza | |
+| B7 — idempotencia en payment-service | José Álvarez | |
+| `notification-service` (TODOs) | José Álvarez | |
+| `notification-service` en docker-compose | José Álvarez | |
 | Capturas de RabbitMQ | Jose Alvarez | |
-| Logs end-to-end | Jose Espinoza | |
-| `DECISIONES.md` | Ambos | |
-| `PROMPTS.md` | Ambos | |
-| (otro) | Ambos | |
+| Logs end-to-end | José Álvarez | |
+| `DECISIONES.md` | José Álvarez | |
+| `PROMPTS.md` | José Álvarez | |
+| (otro) | José Álvarez | |
 
 ---
 
@@ -56,7 +45,6 @@ Jose-Esp-Ordas
 ### Lo que hizo Integrante 1
 
 
-### Lo que hizo Integrante 2
 
 
 ---
