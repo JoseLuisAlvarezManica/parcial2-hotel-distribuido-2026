@@ -78,8 +78,10 @@ En el TODO 2, como mencioné, decidí agregar adicionalmente un try/except para 
 ## Bugs arreglados (Tier 2)
 
 ### B4 — Overlap de fechas
+Identifiqué que dentro de la función find_available_rooms() estaba el filtro que buscaba conflictos. Este no tenía una lógica para comprobar las fechas, por lo cual se creó una y se comprobó con un prompt que se implementara correctamente (me costó identificar si el check_in del sistema era a1). Esto era un problema debido a que era posible hacer más de una reservación en el mismo cuarto porque solo comprobaba que las fechas iniciales no fueran iguales, esto causaría conflictos en el hotel al tener clientes que esperan un cuarto el cual está ocupado.
 
 ### B5 — Race condition con `with_for_update()`
+No existía nada en availability-service que evitara que dos peticiones verificaran el mismo cuarto simultáneamente. Se preguntó a la IA el funcionamiento de `with_for_update()`, donde me enteré de que evita el acceso a recursos hasta que se cierre la sesión o se realice un commit. Se identificó que una posible solución era incluir el `with_for_update()` en la comprobación de conflictos; para ello se modificó la función `find_available_room` para recibir la sesión que se crea en `process_booking`, garantizando que el lock funcione hasta que se realice un commit o un rollback en esa función. Este era un problema debido a que se podían repetir reservaciones en fechas próximas o idénticas, causando conflictos y problemas al tener la posibilidad de dejar a un cliente sin cuarto por cómo está diseñado el sistema.
 
 ### B7 — Idempotencia
 José Álvarez

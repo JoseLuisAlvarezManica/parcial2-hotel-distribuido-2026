@@ -40,11 +40,24 @@ Listen los 3-5 prompts más importantes que escribieron y para qué los usaron.
    **Quién lo usó:** Integrante 1
    **Qué tan útil fue:** (5)
 
+4. **Prompt:** Puedes comprobar que el filtro se haya configurado correctamente (a1 < b2 AND a2 > b1)
+   **Para qué:** Desconocia la estructura del filter y aunque se parecia mucho a una consulta de SQL queria comprobar que se realizo adecuadamente y sin errores.
+   **Quién lo usó:** Integrante 1
+   **Qué tan útil fue:** (5)
+
+5. **Prompt:** Me podrias explicar como funciona With_for_update() en sqlalchemy.
+   **Para qué:** Para conocer su funcionamiento y saber donde debia de ser incluido.
+   **Quién lo usó:** Integrante 1
+   **Qué tan útil fue:** (5)
+
+
 
 ### ¿En qué partes los apoyó?
 (Ej: explicación de `with_for_update()`, generación de boilerplate del notification-service, debugging de un error de aio-pika...)
 
 - Me ayudó a corregir un error mío que ocasioné al crear la idempotencia en payment service (me faltó un await y los logs de error eran confusos).
+
+-Me ayudo en establecer correctamente el filtro para las reservas y en entender como implementar el with_for_update.
 
 ### ¿Hubo cosas en las que la IA dio respuestas incorrectas o que tuvieron que corregir?
 (Ser honestos aquí suma puntos de criterio)

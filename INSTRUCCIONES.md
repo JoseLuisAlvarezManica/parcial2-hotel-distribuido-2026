@@ -211,12 +211,12 @@ Cualquier combinación de:
 Antes del push final:
 
 - [X] `INTEGRANTES.md` lleno con nombres, matrículas y división de trabajo
-- [ ] Tier 1 completo
+- [X] Tier 1 completo
 - [ ] Flujo end-to-end probado y documentado en `evidence/`
 - [ ] Capturas de RabbitMQ Management UI mostrando los exchanges/queues correctos
-- [ ] `PROMPTS.md` lleno (declaración de uso de IA)
+- [X] `PROMPTS.md` lleno (declaración de uso de IA)
 - [ ] `DECISIONES.md` lleno
-- [ ] Commits descriptivos de **ambos** integrantes en el historial
+- [X] Commits descriptivos de **ambos** integrantes en el historial
 - [ ] Link del fork público subido a Moodle
 
 ## Cómo pedir ayuda
