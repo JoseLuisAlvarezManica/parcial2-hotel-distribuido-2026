@@ -61,6 +61,9 @@ Aunque puede existir un valor predeterminado en caso de pruebas (pues en `availa
 ## notification-service completado
 
 **Qué TODOs había:**
+TODO 1: Configurar adecuadamente el consumidor de RabbitMQ
+TODO 2: Crear la logica de negocio dentro del callback
+TODO 3: iniciar el consumer adecuadamente
 
 **Cómo los implementé:**
 

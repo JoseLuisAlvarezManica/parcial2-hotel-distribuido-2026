@@ -43,7 +43,7 @@ async def process_event(payload: dict) -> tuple[bool, str]:
     #Comprobar que no exista dentro de la bd el evento de pago
     async with SessionLocal() as session:
         command = select(Processed_events).where(Processed_events.event_id == booking_id)
-        payment = session.execute(command).scalar_one_or_none()
+        payment = (await session.execute(command)).scalar_one_or_none()
     
         if payment:
             query = select(Payment.status).where(Payment.booking_id == booking_id)
